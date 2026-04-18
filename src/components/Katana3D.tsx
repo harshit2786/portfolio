@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/purity */
 import { useRef, useMemo, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
@@ -48,6 +48,7 @@ function GutsSword({ scrollRef }: { scrollRef: React.MutableRefObject<number> })
   const { scene } = useGLTF('/models/guts-sword.glb');
   const group     = useRef<THREE.Group>(null);
   const modelRef  = useRef<THREE.Group>(null);
+  const { viewport } = useThree();
 
   // Auto-scale to fit scene + apply neon material enhancement
   useEffect(() => {
@@ -83,7 +84,7 @@ function GutsSword({ scrollRef }: { scrollRef: React.MutableRefObject<number> })
   }, [scene]);
 
   // Scroll-driven + idle float animation ────────────────────────────────
-  useFrame(({ clock }) => {
+  useFrame(({ clock, viewport }) => {
     if (!group.current) return;
     const t = clock.elapsedTime;
     const s = Math.min(scrollRef.current / window.innerHeight, 1); // 0 → 1
@@ -100,8 +101,9 @@ function GutsSword({ scrollRef }: { scrollRef: React.MutableRefObject<number> })
     const tRX    = baseRX + s * Math.PI * 0.5;
     const tRY    = baseRY + idleRY + s * Math.PI * 0.5;
     const tRZ    = baseRZ + idleRZ;
-    const tPX    = 2 - s * 1.5;
-    const tPY    = -2.8 + floatY;
+    // viewport-relative so position stays consistent across screen sizes
+    const tPX    = viewport.width * 0.18 - s * 1.5;
+    const tPY    = -viewport.height * 0.45 + floatY;
     const tPZ    = -s * 5;
     const tScale = 1 - s * 0.38;
 
@@ -118,7 +120,7 @@ function GutsSword({ scrollRef }: { scrollRef: React.MutableRefObject<number> })
 
   return (
     // outer group — handles scroll / float
-    <group ref={group} position={[1.4, -2.3, 0]} rotation={[0.1, -0.3, 0.55 - Math.PI]}>
+    <group ref={group} position={[viewport.width * 0.13, -viewport.height * 0.37, 0]} rotation={[0.1, -0.3, 0.55 - Math.PI]}>
       {/* inner ref — used for auto-scale / centre in useEffect */}
       <group ref={modelRef} rotation={[Math.PI, 0, 0]}>
         <primitive object={scene} />
