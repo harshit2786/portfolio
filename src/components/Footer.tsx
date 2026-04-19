@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
-import { PORTFOLIO, TRANSLATIONS, type Lang } from '../data';
+import { TRANSLATIONS, type Lang } from '../data';
 
 interface Props { lang: Lang; }
 
@@ -26,12 +26,6 @@ export default function Footer({ lang }: Props) {
             textTransform: 'uppercase',
           }}>
             © {new Date().getFullYear()} {t.copy}
-          </div>
-          <div style={{
-            fontFamily: 'var(--font-jp)', fontSize: 11,
-            color: 'var(--text-d)', marginTop: 4, letterSpacing: '0.12em',
-          }}>
-            {PORTFOLIO.nameJP} // デジタルの侍
           </div>
         </div>
 

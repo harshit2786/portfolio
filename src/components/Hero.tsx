@@ -121,7 +121,7 @@ export default function Hero({ lang, theme }: Props) {
           }}
         >
           <span style={{ width: 24, height: 1, background: 'var(--primary)', display: 'inline-block' }} />
-          {lang === 'en' ? 'DIGITAL ARCHITECT' : 'デジタルアーキテクト'}
+          FULL STACK DEVELOPER
         </motion.div>
 
         {/* NAME — BIG GLITCH */}
@@ -307,7 +307,7 @@ export default function Hero({ lang, theme }: Props) {
         display: 'flex', alignItems: 'center', gap: 8,
       }}>
         <span style={{ width: 20, height: 1, background: 'var(--text-d)', display: 'inline-block' }}/>
-        デジタルの侍 // Digital Samurai
+        ハーシット・クマール・シン
         <span style={{ width: 20, height: 1, background: 'var(--text-d)', display: 'inline-block' }}/>
       </div>
 

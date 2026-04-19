@@ -134,7 +134,7 @@ export default function App() {
               <About lang={lang} />
               <Experience lang={lang} />
               <Projects lang={lang} />
-              <TechStack lang={lang} />
+              <TechStack lang={lang} theme={theme} />
               <Contact lang={lang} />
             </main>
             <Footer lang={lang} />
