@@ -5,10 +5,13 @@ import { useGLTF } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
+const isMobile = window.matchMedia('(max-width: 768px)').matches;
+const isLowEnd = isMobile || (typeof window !== 'undefined' && window.devicePixelRatio <= 1);
+
 // ─── Floating ambient particles ──────────────────────────────────────────────
 function Particles() {
   const ref = useRef<THREE.Points>(null);
-  const COUNT = 60;
+  const COUNT = isMobile ? 25 : 60;
 
   const [positions, colors] = useMemo(() => {
     const pos = new Float32Array(COUNT * 3);
@@ -168,14 +171,16 @@ function Scene({
       <GutsSword scrollRef={scrollRef} />
       <Particles />
 
-      <EffectComposer>
-        <Bloom
-          luminanceThreshold={0.85}
-          luminanceSmoothing={0.6}
-          intensity={0.7}
-          mipmapBlur
-        />
-      </EffectComposer>
+      {!isLowEnd && (
+        <EffectComposer>
+          <Bloom
+            luminanceThreshold={0.85}
+            luminanceSmoothing={0.6}
+            intensity={0.7}
+            mipmapBlur
+          />
+        </EffectComposer>
+      )}
     </>
   );
 }
@@ -196,10 +201,10 @@ export default function Katana3D({ theme }: Props) {
     <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
       <Canvas
         camera={{ position: [0, 0, 7], fov: 48 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: !isMobile, alpha: true }}
         style={{ background: 'transparent' }}
-        dpr={[1, 1.5]}
-        shadows
+        dpr={isMobile ? [1, 1] : [1, 1.5]}
+        shadows={!isMobile}
       >
         <Scene scrollRef={scrollRef} isDark={theme === 'dark'} />
       </Canvas>

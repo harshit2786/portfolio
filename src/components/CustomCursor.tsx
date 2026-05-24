@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
-export default function CustomCursor() {
+// Detect touch/stylus devices once at module load — no event listeners needed
+const isCoarsePointer = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
+function CursorImpl() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
@@ -95,4 +98,9 @@ export default function CustomCursor() {
       `}</style>
     </>
   );
+}
+
+export default function CustomCursor() {
+  if (isCoarsePointer) return null;
+  return <CursorImpl />;
 }

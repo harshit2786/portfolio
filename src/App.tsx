@@ -1,16 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 
 import CustomCursor from './components/CustomCursor';
-import KanjiRain from './components/KanjiRain';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import TechStack from './components/TechStack';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+
+const KanjiRain = lazy(() => import('./components/KanjiRain'));
+const About = lazy(() => import('./components/About'));
+const Experience = lazy(() => import('./components/Experience'));
+const Projects = lazy(() => import('./components/Projects'));
+const TechStack = lazy(() => import('./components/TechStack'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
 
 import type { Lang, Theme } from './data';
 import './index.css';
@@ -117,7 +118,9 @@ export default function App() {
         }}
       />
 
-      <KanjiRain theme={theme} />
+      <Suspense fallback={null}>
+        <KanjiRain theme={theme} />
+      </Suspense>
       <CustomCursor />
 
       <AnimatePresence>
@@ -131,13 +134,15 @@ export default function App() {
             <Navbar theme={theme} lang={lang} onThemeToggle={toggleTheme} onLangToggle={toggleLang} />
             <main>
               <Hero lang={lang} theme={theme} />
-              <About lang={lang} />
-              <Experience lang={lang} />
-              <Projects lang={lang} />
-              <TechStack lang={lang} theme={theme} />
-              <Contact lang={lang} />
+              <Suspense fallback={null}>
+                <About lang={lang} />
+                <Experience lang={lang} />
+                <Projects lang={lang} />
+                <TechStack lang={lang} theme={theme} />
+                <Contact lang={lang} />
+              </Suspense>
             </main>
-            <Footer lang={lang} />
+            <Suspense fallback={null}><Footer lang={lang} /></Suspense>
           </motion.div>
         )}
       </AnimatePresence>

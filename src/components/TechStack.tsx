@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
@@ -85,8 +85,21 @@ function Globe({ techs, isDark }: { techs: Array<{ name: string; color: string; 
 
 // ─── Main section ─────────────────────────────────────────────────────────────
 export default function TechStack({ lang, theme }: Props) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+
+  // Track actual viewport presence to pause the Canvas render loop when off-screen
+  const [isInViewport, setIsInViewport] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setIsInViewport(entry.isIntersecting),
+      { threshold: 0 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
   const t = TRANSLATIONS[lang].stack;
   const p = PORTFOLIO;
 
@@ -129,6 +142,7 @@ export default function TechStack({ lang, theme }: Props) {
           gl={{ antialias: true, alpha: true }}
           style={{ background: 'transparent' }}
           dpr={[1, 1.5]}
+          frameloop={isInViewport ? 'always' : 'demand'}
         >
           <ambientLight intensity={0.5} />
           <Globe techs={allTechs} isDark={theme === 'dark'} />
