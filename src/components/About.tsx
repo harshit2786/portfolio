@@ -52,7 +52,7 @@ export default function About({ lang }: Props) {
           animate={inView ? 'show' : 'hidden'}
         >
           {/* Header */}
-          <motion.div variants={fadeUp} style={{ marginBottom: 64 }}>
+          <motion.div variants={fadeUp} className="about-header" style={{ marginBottom: 64 }}>
             <div className="section-tag">{t.tag}</div>
             <h2 className="section-title">
               {t.title} <span>//</span>
@@ -60,7 +60,7 @@ export default function About({ lang }: Props) {
             <div className="section-jp">{t.titleSub}</div>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+          <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
 
             {/* LEFT — TEXT */}
             <motion.div variants={slideLeft}>
@@ -199,11 +199,6 @@ export default function About({ lang }: Props) {
         </motion.div>
       </div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          #about .grid-cols { grid-template-columns: 1fr !important; gap: 40px !important; }
-        }
-      `}</style>
     </section>
   );
 }

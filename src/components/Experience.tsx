@@ -20,6 +20,7 @@ export default function Experience({ lang }: Props) {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
+          className="exp-header"
           style={{ marginBottom: 80, textAlign: 'center' }}
         >
           <div className="section-tag" style={{ justifyContent: 'center' }}>{t.tag}</div>
@@ -34,6 +35,7 @@ export default function Experience({ lang }: Props) {
             initial={{ scaleY: 0 }}
             animate={inView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="exp-timeline-line"
             style={{
               position: 'absolute', left: '50%', top: 0, bottom: 0,
               width: 1, background: 'linear-gradient(180deg, var(--primary), var(--secondary), var(--accent))',
@@ -50,6 +52,7 @@ export default function Experience({ lang }: Props) {
                 initial={{ opacity: 0, x: isLeft ? -80 : 80 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.7, delay: i * 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="exp-timeline-item"
                 style={{
                   display: 'flex',
                   justifyContent: isLeft ? 'flex-end' : 'flex-start',
@@ -64,6 +67,7 @@ export default function Experience({ lang }: Props) {
                   initial={{ scale: 0 }}
                   animate={inView ? { scale: 1 } : {}}
                   transition={{ delay: i * 0.2 + 0.4, type: 'spring', stiffness: 400 }}
+                  className="exp-timeline-dot"
                   style={{
                     position: 'absolute',
                     left: 'calc(50% - 10px)',
@@ -161,17 +165,6 @@ export default function Experience({ lang }: Props) {
         </div>
       </div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          #experience .timeline-line { left: 20px !important; }
-          #experience .timeline-item {
-            padding-right: 0 !important;
-            padding-left: 60px !important;
-            justify-content: flex-start !important;
-          }
-          #experience .timeline-dot { left: 10px !important; }
-        }
-      `}</style>
     </section>
   );
 }

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Download } from 'lucide-react';
 import { PORTFOLIO, TRANSLATIONS, type Lang } from '../data';
 import { lazy, Suspense } from 'react';
-const Katana3D = lazy(() => import('./Katana3D'));
+const BerserkArmor3D = lazy(() => import('./BerserkArmor3D'));
 
 interface Props { lang: Lang; theme: string; }
 
@@ -74,7 +74,7 @@ export default function Hero({ lang, theme }: Props) {
     >
       {/* 3-D katana scene — lazy loaded so Three.js doesn't block first paint */}
       <Suspense fallback={null}>
-        <Katana3D theme={theme} />
+        <BerserkArmor3D theme={theme} />
       </Suspense>
 
       {/* Grid bg */}
@@ -84,6 +84,7 @@ export default function Hero({ lang, theme }: Props) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
+        className="hero-top-bar"
         style={{
           position: 'absolute', top: 80, left: 0, right: 0,
           padding: '0 48px',
@@ -106,7 +107,7 @@ export default function Hero({ lang, theme }: Props) {
       </motion.div>
 
       {/* MAIN CONTENT */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px', width: '100%', zIndex: 2, position: 'relative' }}>
+      <div className="hero-content" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px', width: '100%', zIndex: 2, position: 'relative' }}>
 
         {/* Pre-title */}
         <motion.div
@@ -297,7 +298,7 @@ export default function Hero({ lang, theme }: Props) {
       </motion.div>
 
       {/* VERTICAL LABEL */}
-      <div style={{
+      <div className="hero-vertical-label" style={{
         position: 'absolute', right: 48, top: '50%',
         transform: 'translateY(-50%) rotate(90deg)',
         transformOrigin: 'center',
@@ -311,14 +312,6 @@ export default function Hero({ lang, theme }: Props) {
         <span style={{ width: 20, height: 1, background: 'var(--text-d)', display: 'inline-block' }}/>
       </div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          #hero { padding: 80px 0 60px; }
-          #hero .top-bar { padding: 0 20px !important; }
-          #hero .main-content { padding: 0 20px !important; }
-          .vertical-label { display: none !important; }
-        }
-      `}</style>
     </section>
   );
 }

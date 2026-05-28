@@ -135,6 +135,7 @@ export default function Contact({ lang }: Props) {
             <motion.a
               href={`mailto:${p.email}`}
               whileHover={{ scale: 1.02, borderColor: 'var(--primary)' }}
+              className="contact-email-btn"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 12,
                 padding: '18px 32px',

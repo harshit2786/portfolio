@@ -8,12 +8,12 @@ export default function Footer({ lang }: Props) {
   const t = TRANSLATIONS[lang].footer;
 
   return (
-    <footer style={{
+    <footer className="footer-wrap" style={{
       background: 'var(--bg-surface)',
       borderTop: '1px solid var(--border)',
       padding: '32px 48px',
     }}>
-      <div style={{
+      <div className="footer-inner" style={{
         maxWidth: 1200, margin: '0 auto',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         flexWrap: 'wrap', gap: 16,
