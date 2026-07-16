@@ -50,8 +50,8 @@ export const PORTFOLIO = {
       companyFull: "Outlier AI (Scale AI)",
       role: "Freelance AI Coding Specialist",
       roleJP: "フリーランスAIコーディングスペシャリスト",
-      duration: "NOV 2025 — PRESENT",
-      durationJP: "2025年11月 — 現在",
+      duration: "NOV 2025 — APR 2026",
+      durationJP: "2025年11月 — 2026年4月",
       location: "Remote // リモート",
       description: {
         en: "Contributing to RLHF pipelines by crafting complex failure-inducing prompts and validating model weaknesses. Evaluating AI-generated code, developing golden solutions, and engineering training data across full-stack, data analysis, and generalist domains.",
