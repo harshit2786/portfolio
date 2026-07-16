@@ -51,6 +51,7 @@ export default function Navbar({ theme, lang, onThemeToggle, onLangToggle }: Pro
   return (
     <>
       <motion.nav
+        className="site-navbar"
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -236,6 +237,7 @@ export default function Navbar({ theme, lang, onThemeToggle, onLangToggle }: Pro
 
       <style>{`
         @media (max-width: 768px) {
+          .site-navbar { padding: 0 20px !important; }
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
         }

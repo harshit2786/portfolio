@@ -14,7 +14,7 @@ export const PORTFOLIO = {
   github: "https://github.com/harshit2786",
   linkedin: "https://www.linkedin.com/in/harshit-kumar-singh-58b0b023a/",
   twitter: "https://twitter.com/harshit2786",
-  resumeLink: "https://drive.google.com/file/d/1fr0e9bDRlO009PvDjva5OGDxAgqUduab/view?usp=drive_link",
+  resumeLink: "https://drive.google.com/file/d/15GkcjiOyEZUvhpGiHaJ1adqi3MLhNlYi/view?usp=sharing",
 
   bio: {
     en: "IIT Kanpur graduate and full-stack architect. I build AI-driven platforms and high-performance systems — from LLM-powered enterprise tools to low-latency Rust engines. Currently engineering at Nanoheal, leading AI product development and system architecture. JLPT N5 certified.",

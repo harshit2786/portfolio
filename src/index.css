@@ -354,7 +354,8 @@ img, svg { display: block; }
 
 /* Hero */
 @media (max-width: 768px) {
-  .hero-top-bar       { top: 12px !important; padding: 0 20px !important; }
+  #hero               { padding-top: 72px !important; }
+  .hero-top-bar       { top: 72px !important; padding: 0 20px !important; }
   .hero-content       { padding: 0 20px !important; }
   .hero-vertical-label { display: none !important; }
 }
